@@ -163,9 +163,6 @@ function TourOverlay({
                 }
             } else {
                 setTargets([])
-                console.error(
-                    `[Tour] No element found with data-tour-step-id="${step.id}". Make sure to add the attribute to at least one element.`
-                )
             }
         }
 
