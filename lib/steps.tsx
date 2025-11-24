@@ -10,22 +10,22 @@ export const steps = [
         nextRoute: "/docs",
     },
     {
-        id: "tour-docs-nav",
+        id: "tour-nav",
         title: "Customization",
         content: "Easily adjust the popup’s position and appearance.",
+        side: "bottom",
+        align: "start",
+        className: "rounded-none",
         previousRoute: "/",
         nextRoute: "/",
-        side: "right",
-        align: "start",
-        className: "w-max",
     },
     {
         id: "tour-github",
         title: "Multiple Elements",
         content:
             "You can highlight several elements in a single step—just assign them the same ID.",
-        previousRoute: "/docs",
         align: "end",
+        previousRoute: "/docs",
     },
     {
         id: "tour-end",

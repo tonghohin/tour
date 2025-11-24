@@ -12,7 +12,6 @@ export const siteConfig = {
         {
             href: "/docs",
             label: "Docs",
-            tourStepId: "tour-docs-nav",
         },
     ],
 }

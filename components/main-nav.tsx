@@ -11,19 +11,14 @@ export function MainNav({
     className,
     ...props
 }: React.ComponentProps<"nav"> & {
-    items: { href: string; label: string; tourStepId: string }[]
+    items: { href: string; label: string }[]
 }) {
     const pathname = usePathname()
 
     return (
         <nav className={cn("items-center gap-0.5", className)} {...props}>
             {items.map((item) => (
-                <Button
-                    key={item.href}
-                    data-tour-step-id={item.tourStepId}
-                    variant="ghost"
-                    asChild
-                    size="sm">
+                <Button key={item.href} variant="ghost" asChild size="sm">
                     <Link
                         href={item.href}
                         className={cn(
