@@ -6,6 +6,6 @@ A component for building onboarding tours. Designed to integrate with shadcn/ui.
 
 Visit https://onboarding-tour.vercel.app/docs to view the documentation.
 
-## License`
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
