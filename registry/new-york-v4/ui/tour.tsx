@@ -129,7 +129,7 @@ function TourOverlay({
     React.useEffect(() => {
         function updatePosition(shouldScroll = false) {
             const elements = document.querySelectorAll(
-                `[data-tour-step-id='${step.id}']`
+                `[data-tour-step-id*='${step.id}']`
             )
 
             if (elements.length > 0) {
