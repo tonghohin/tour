@@ -136,14 +136,14 @@ function TourOverlay({
 
                     return {
                         rect: {
-                            width: rect.width + 8,
-                            height: rect.height + 8,
-                            x: rect.left - 4,
-                            y: rect.top - 4,
-                            left: rect.left - 4,
-                            top: rect.top - 4,
-                            right: rect.right + 4,
-                            bottom: rect.bottom + 4,
+                            width: rect.width,
+                            height: rect.height,
+                            x: rect.left,
+                            y: rect.top,
+                            left: rect.left,
+                            top: rect.top,
+                            right: rect.right,
+                            bottom: rect.bottom,
                             toJSON: () => {},
                         },
                         radius,
