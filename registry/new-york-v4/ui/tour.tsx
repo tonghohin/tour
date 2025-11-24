@@ -163,6 +163,9 @@ function TourOverlay({
                 }
             } else {
                 setTargets([])
+                console.error(
+                    `[Tour] No element found with data-tour-step-id="${step.id}". Make sure to add the attribute to at least one element.`
+                )
             }
         }
 
@@ -198,6 +201,7 @@ function TourOverlay({
     }, [])
 
     if (!document) return null
+    if (targets.length === 0) return null
 
     return createPortal(
         <div className="fixed inset-0 z-50">
