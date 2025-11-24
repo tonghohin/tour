@@ -1,4 +1,5 @@
 import { type Step } from "@/registry/new-york-v4/ui/tour"
+import { ArrowUpRightIcon } from "lucide-react"
 
 export const steps = [
     {
@@ -32,5 +33,10 @@ export const steps = [
         content:
             "As you’ve already seen, multipage tours are supported and easy to implement.",
         nextRoute: "/docs",
+        nextLabel: (
+            <>
+                View Docs <ArrowUpRightIcon />
+            </>
+        ),
     },
 ] satisfies Step[]

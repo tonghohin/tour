@@ -42,6 +42,8 @@ interface Step {
     content: React.ReactNode
     nextRoute?: string
     previousRoute?: string
+    nextLabel?: React.ReactNode
+    previousLabel?: React.ReactNode
     side?: React.ComponentProps<typeof Content>["side"]
     sideOffset?: React.ComponentProps<typeof Content>["sideOffset"]
     align?: React.ComponentProps<typeof Content>["align"]
@@ -295,14 +297,15 @@ function TourOverlay({
                                             onClick={onPrevious}
                                             asChild>
                                             <Link href={step.previousRoute}>
-                                                Previous
+                                                {step.previousLabel ??
+                                                    "Previous"}
                                             </Link>
                                         </Button>
                                     ) : (
                                         <Button
                                             variant="outline"
                                             onClick={onPrevious}>
-                                            Previous
+                                            {step.previousLabel ?? "Previous"}
                                         </Button>
                                     ))}
                                 {step.nextRoute ? (
@@ -311,18 +314,21 @@ function TourOverlay({
                                         onClick={onNext}
                                         asChild>
                                         <Link href={step.nextRoute}>
-                                            {currentStepIndex === totalSteps - 1
-                                                ? "Finish"
-                                                : "Next"}
+                                            {step.nextLabel ??
+                                                (currentStepIndex ===
+                                                totalSteps - 1
+                                                    ? "Finish"
+                                                    : "Next")}
                                         </Link>
                                     </Button>
                                 ) : (
                                     <Button
                                         className="ml-auto"
                                         onClick={onNext}>
-                                        {currentStepIndex === totalSteps - 1
-                                            ? "Finish"
-                                            : "Next"}
+                                        {step.nextLabel ??
+                                            (currentStepIndex === totalSteps - 1
+                                                ? "Finish"
+                                                : "Next")}
                                     </Button>
                                 )}
                             </CardFooter>
