@@ -3,7 +3,7 @@ export const siteConfig = {
     url: "https://onboarding-tour.vercel.app",
     title: "Tour",
     description:
-        "A component for building onboarding tours, designed to integrate with shadcn/ui.",
+        "A component for building onboarding tours. Designed to integrate with shadcn/ui.",
     links: {
         website: "https://tonghohin.vercel.app",
         github: "https://github.com/tonghohin/tour",

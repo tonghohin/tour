@@ -5,7 +5,7 @@ export const steps = [
         id: "tour-header",
         title: "Welcome",
         content:
-            "Tour is a component for building onboarding tours, designed to integrate with shadcn/ui.",
+            "Tour is a component for building onboarding tours. Designed to integrate with shadcn/ui.",
         nextRoute: "/docs",
     },
     {

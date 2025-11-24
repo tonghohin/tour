@@ -1,6 +1,6 @@
 # Tour
 
-A component for building onboarding tours, designed to integrate with shadcn/ui.
+A component for building onboarding tours. Designed to integrate with shadcn/ui.
 
 ## Documentation
 
