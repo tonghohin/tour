@@ -25,4 +25,11 @@ export const steps = [
         previousRoute: "/docs",
         align: "end",
     },
+    {
+        id: "tour-end",
+        title: "Multipage Tour",
+        content:
+            "As you’ve already seen, multipage tours are supported and easy to implement.",
+        nextRoute: "/docs",
+    },
 ] satisfies Step[]
