@@ -16,6 +16,7 @@ export const steps = [
         nextRoute: "/",
         side: "right",
         align: "start",
+        className: "w-max",
     },
     {
         id: "tour-github",

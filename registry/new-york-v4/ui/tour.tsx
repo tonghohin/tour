@@ -6,6 +6,7 @@ import Link from "next/link"
 import * as React from "react"
 import { createPortal } from "react-dom"
 
+import { cn } from "@/lib/utils"
 import { Button } from "@/registry/new-york-v4/ui/button"
 import {
     Card,
@@ -45,6 +46,7 @@ interface Step {
     sideOffset?: React.ComponentProps<typeof Content>["sideOffset"]
     align?: React.ComponentProps<typeof Content>["align"]
     alignOffset?: React.ComponentProps<typeof Content>["alignOffset"]
+    className?: string
 }
 
 function Tour({
@@ -261,7 +263,7 @@ function TourOverlay({
                         }}
                     />
                     <PopoverContent
-                        className="px-0"
+                        className={cn("px-0", step.className)}
                         side={step.side}
                         sideOffset={step.sideOffset}
                         align={step.align}
