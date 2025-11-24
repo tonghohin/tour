@@ -1,0 +1,51 @@
+---
+title: Customization
+description: Customize the appearance of tour steps.
+component: true
+---
+
+You can customize the appearance of each tour step using various properties like `side`, `align`, `className`, and more.
+
+If you want to change the style for all steps at once, you can do it directly in your `tour.tsx`.
+
+## Example
+
+```tsx showLineNumbers title="lib/steps.tsx"
+import { type Step } from "@/components/ui/tour"
+import { ArrowRightIcon, CheckIcon } from "lucide-react"
+
+export const steps = [
+    {
+        id: "positioning",
+        title: "Positioning",
+        content:
+            "Each tour step uses the Popover component, so you can pass any props supported by Popover Content.",
+        side: "bottom",
+        sideOffset: 10,
+        align: "start",
+        alignOffset: 10,
+    },
+    {
+        id: "styling",
+        title: "Custom Styling",
+        content: "Apply your own styles to the tour step using className.",
+        className: "w-96 bg-destructive",
+    },
+    {
+        id: "buttonLabels",
+        title: "Custom Button Labels",
+        content:
+            "Customize the labels of the next and previous buttons on each step.",
+        previousLabel: <>← Previous Step</>,
+        nextLabel: (
+            <>
+                Complete Tour <CheckIcon />
+            </>
+        ),
+    },
+] satisfies Step[]
+```
+
+## Available Options
+
+For a full list of all properties and their types, see the [API Reference](/docs/api#step).

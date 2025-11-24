@@ -1,0 +1,35 @@
+---
+title: Multipage Tours
+description: Create tours that span across multiple pages.
+component: true
+---
+
+Create tours that navigate across multiple pages by using the `nextRoute` and `previousRoute` properties.
+
+## Example
+
+```tsx showLineNumbers title="lib/steps.ts"
+import { type Step } from "@/components/ui/tour"
+
+export const steps = [
+    {
+        id: "home-hero",
+        title: "Welcome",
+        content: "Welcome to our application! Let's start the tour.",
+        nextRoute: "/dashboard", // Navigate to dashboard on next
+    },
+    {
+        id: "dashboard-stats",
+        title: "Dashboard",
+        content: "Here you can see your key metrics and statistics.",
+        previousRoute: "/", // Navigate back to home on previous
+        nextRoute: "/settings", // Navigate to settings on next
+    },
+    {
+        id: "settings-profile",
+        title: "Settings",
+        content: "Customize your profile and preferences here.",
+        previousRoute: "/dashboard", // Navigate back to dashboard
+    },
+] satisfies Step[]
+```

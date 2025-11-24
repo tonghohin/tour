@@ -1,0 +1,47 @@
+---
+title: Multiple Elements
+description: Highlight multiple elements in a single tour step.
+component: true
+---
+
+Highlight multiple elements in a single step by assigning them the same `data-tour-step-id` attribute.
+
+## Example
+
+```tsx showLineNumbers title="app/page.tsx"
+export default function Page() {
+    return (
+        <div>
+            <header data-tour-step-id="navigation">
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/about">About</a>
+                </nav>
+            </header>
+
+            <aside data-tour-step-id="navigation">
+                <ul>
+                    <li>Dashboard</li>
+                    <li>Settings</li>
+                </ul>
+            </aside>
+
+            <main>
+                <h1>Welcome</h1>
+            </main>
+        </div>
+    )
+}
+```
+
+```tsx showLineNumbers title="lib/steps.ts"
+import { type Step } from "@/components/ui/tour"
+
+export const steps = [
+    {
+        id: "navigation",
+        title: "Navigation Areas",
+        content: "Both the header and sidebar will be highlighted.",
+    },
+] satisfies Step[]
+```
