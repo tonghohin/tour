@@ -1,0 +1,73 @@
+---
+title: Get Started
+description: An onboarding tour component built for shadcn/ui, following the same design patterns and styles.
+component: true
+---
+
+## Prerequisite
+
+Before installing, make sure you already have **[shadcn/ui](https://ui.shadcn.com/docs/installation)** set up in your project.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://onboarding-tour.vercel.app/r/tour.json
+```
+
+## Usage
+
+### Setup
+
+First, wrap your application with the `Tour` component. This provides the tour context to your entire app:
+
+```tsx showLineNumbers title="app/layout.tsx"
+import { type Step, Tour } from "@/components/ui/tour"
+
+const steps = [
+    {
+        id: "welcome",
+        title: "Welcome",
+        content: "Let's take a quick tour of the main features.",
+    },
+    {
+        id: "feature-1",
+        title: "Feature One",
+        content: "This is an important feature.",
+    },
+] satisfies Step[]
+
+export default function RootLayout() {
+    return <Tour steps={steps}>{/* Your app content */}</Tour>
+}
+```
+
+### Starting the Tour
+
+Use the `useTour` hook to control the tour from anywhere in your app:
+
+```tsx showLineNumbers
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { useTour } from "@/components/ui/tour"
+
+export function StartTourButton() {
+    const tour = useTour()
+
+    return <Button onClick={() => tour.start()}>Start Tour</Button>
+}
+```
+
+### Targeting Elements
+
+Add `data-tour-step-id` attributes to elements you want to highlight in the tour. The tour will automatically find and highlight elements matching the step's `id`:
+
+```tsx showLineNumbers
+<div data-tour-step-id="welcome">
+    <h1>Welcome to My App</h1>
+</div>
+
+<div data-tour-step-id="feature-1">
+    <p>This is a feature</p>
+</div>
+```

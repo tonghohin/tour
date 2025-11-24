@@ -1,0 +1,43 @@
+---
+title: API Reference
+description: Complete API reference for the Tour component.
+component: true
+---
+
+## Tour
+
+The `Tour` component is the main container that provides tour functionality to your application.
+
+### Props
+
+| Prop       | Type              | Description                            |
+| ---------- | ----------------- | -------------------------------------- |
+| `steps`    | `Step[]`          | Array of tour steps to display.        |
+| `children` | `React.ReactNode` | Content to wrap with the tour context. |
+
+## Step
+
+Each step in the tour has the following properties:
+
+| Property        | Type                                     | Description                                                                                                    |
+| --------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `id`            | `string`                                 | Unique identifier for the step. Used to find the target element by matching its `data-tour-step-id` attribute. |
+| `title`         | `React.ReactNode`                        | Title displayed in the tour card.                                                                              |
+| `content`       | `React.ReactNode`                        | Content displayed in the tour card.                                                                            |
+| `side`          | `"top" \| "bottom" \| "left" \| "right"` | Optional. The preferred side of the anchor to render against when open.                                        |
+| `sideOffset`    | `number`                                 | Optional. The distance in pixels from the anchor.                                                              |
+| `align`         | `"start" \| "center" \| "end"`           | Optional. The preferred alignment against the anchor.                                                          |
+| `alignOffset`   | `number`                                 | Optional. An offset in pixels from the "start" or "end" alignment options.                                     |
+| `nextRoute`     | `string`                                 | Optional. Route to navigate to when the "Next" button is clicked.                                              |
+| `previousRoute` | `string`                                 | Optional. Route to navigate to when the "Previous" button is clicked.                                          |
+
+## useTour
+
+The `useTour` hook provides methods to control the tour's visibility.
+
+### Return Value
+
+| Property | Type         | Description                                    |
+| -------- | ------------ | ---------------------------------------------- |
+| `start`  | `() => void` | Function to start the tour from the beginning. |
+| `close`  | `() => void` | Function to close the tour.                    |
