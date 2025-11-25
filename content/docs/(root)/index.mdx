@@ -14,30 +14,45 @@ Before installing, make sure you already have **[shadcn/ui](https://ui.shadcn.co
 npx shadcn@latest add https://onboarding-tour.vercel.app/r/tour.json
 ```
 
+## Concepts
+
+### Tour
+
+A **Tour** represents a complete onboarding flow or a guide for a specific feature. It is identified by a unique `id` and contains a sequence of steps. You can define multiple tours in your application (e.g., "onboarding", "new-feature-x", "settings-guide") and start them independently.
+
+### Step
+
+A **Step** is a single card in the tour sequence. Each step targets a specific element on the page using the `data-tour-step-id` attribute. Steps can be customized with a title, content, navigation labels, and positioning preferences.
+
 ## Usage
 
 ### Setup
 
-First, wrap your application with the `Tour` component. This provides the tour context to your entire app:
+First, wrap your application with the `TourProvider` component. This provides the tour context to your entire app:
 
 ```tsx showLineNumbers title="app/layout.tsx"
-import { type Step, Tour } from "@/components/ui/tour"
+import { type Tour, TourProvider } from "@/components/ui/tour"
 
-const steps = [
+const tours = [
     {
-        id: "welcome",
-        title: "Welcome",
-        content: "Let's take a quick tour of the main features.",
+        id: "main",
+        steps: [
+            {
+                id: "welcome",
+                title: "Welcome",
+                content: "Let's take a quick tour of the main features.",
+            },
+            {
+                id: "feature-1",
+                title: "Feature One",
+                content: "This is an important feature.",
+            },
+        ],
     },
-    {
-        id: "feature-1",
-        title: "Feature One",
-        content: "This is an important feature.",
-    },
-] satisfies Step[]
+] satisfies Tour[]
 
 export default function RootLayout() {
-    return <Tour steps={steps}>{/* Your app content */}</Tour>
+    return <TourProvider tours={tours}>{/* Your app content */}</TourProvider>
 }
 ```
 
@@ -54,7 +69,7 @@ import { useTour } from "@/components/ui/tour"
 export function StartTourButton() {
     const tour = useTour()
 
-    return <Button onClick={() => tour.start()}>Start Tour</Button>
+    return <Button onClick={() => tour.start("main")}>Start Tour</Button>
 }
 ```
 

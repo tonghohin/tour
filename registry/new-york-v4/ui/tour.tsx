@@ -24,7 +24,7 @@ import {
 } from "@/registry/new-york-v4/ui/popover"
 
 const TourContext = React.createContext<{
-    start: () => void
+    start: (tourId: string) => void
     close: () => void
 } | null>(null)
 
@@ -51,15 +51,24 @@ interface Step {
     className?: string
 }
 
-function Tour({
-    steps,
+interface Tour {
+    id: string
+    steps: Step[]
+}
+
+function TourProvider({
+    tours,
     children,
 }: {
-    steps: Step[]
+    tours: Tour[]
     children: React.ReactNode
 }) {
     const [isOpen, setIsOpen] = React.useState(false)
+    const [activeTourId, setActiveTourId] = React.useState<string | null>(null)
     const [currentStepIndex, setCurrentStepIndex] = React.useState(0)
+
+    const activeTour = tours.find((tour) => tour.id === activeTourId)
+    const steps = activeTour?.steps || []
 
     function next() {
         if (currentStepIndex < steps.length - 1) {
@@ -67,6 +76,7 @@ function Tour({
         } else {
             setIsOpen(false)
             setCurrentStepIndex(0)
+            setActiveTourId(null)
         }
     }
 
@@ -79,11 +89,22 @@ function Tour({
     function close() {
         setIsOpen(false)
         setCurrentStepIndex(0)
+        setActiveTourId(null)
     }
 
-    function start() {
-        setIsOpen(true)
-        setCurrentStepIndex(0)
+    function start(tourId: string) {
+        const tour = tours.find((tour) => tour.id === tourId)
+        if (tour) {
+            if (tour.steps.length > 0) {
+                setActiveTourId(tourId)
+                setIsOpen(true)
+                setCurrentStepIndex(0)
+            } else {
+                console.error(`Tour with id '${tourId}' has no steps.`)
+            }
+        } else {
+            console.error(`Tour with id '${tourId}' not found.`)
+        }
     }
 
     return (
@@ -93,7 +114,7 @@ function Tour({
                 close,
             }}>
             {children}
-            {isOpen && (
+            {isOpen && activeTour && steps.length > 0 && (
                 <TourOverlay
                     step={steps[currentStepIndex]}
                     currentStepIndex={currentStepIndex}
@@ -342,4 +363,4 @@ function TourOverlay({
     )
 }
 
-export { Tour, useTour, type Step }
+export { TourProvider, useTour, type Step, type Tour }

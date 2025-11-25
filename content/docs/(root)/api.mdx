@@ -4,16 +4,25 @@ description: Complete API reference for the Tour component.
 component: true
 ---
 
-## Tour
+## TourProvider
 
-The `Tour` component is the main container that provides tour functionality to your application.
+The `TourProvider` component is the main container that provides tour functionality to your application.
 
 ### Props
 
 | Prop       | Type              | Description                            |
 | ---------- | ----------------- | -------------------------------------- |
-| `steps`    | `Step[]`          | Array of tour steps to display.        |
+| `tours`    | `Tour[]`          | Array of tours configuration.          |
 | `children` | `React.ReactNode` | Content to wrap with the tour context. |
+
+## Tour
+
+Configuration object for a tour.
+
+| Property | Type     | Description                     |
+| -------- | -------- | ------------------------------- |
+| `id`     | `string` | Unique identifier for the tour. |
+| `steps`  | `Step[]` | Array of steps in the tour.     |
 
 ## Step
 
@@ -40,7 +49,7 @@ The `useTour` hook provides methods to control the tour's visibility.
 
 ### Return Value
 
-| Property | Type         | Description                                    |
-| -------- | ------------ | ---------------------------------------------- |
-| `start`  | `() => void` | Function to start the tour from the beginning. |
-| `close`  | `() => void` | Function to close the tour.                    |
+| Property | Type                       | Description                                  |
+| -------- | -------------------------- | -------------------------------------------- |
+| `start`  | `(tourId: string) => void` | Function to start a specific tour by its ID. |
+| `close`  | `() => void`               | Function to close the current tour.          |

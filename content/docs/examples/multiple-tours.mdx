@@ -1,0 +1,91 @@
+---
+title: Multiple Tours
+description: Define and manage multiple independent tours in your application.
+component: true
+---
+
+You can define multiple independent tours for different features or workflows in your application. Each tour is identified by a unique `id` and can be started separately.
+
+## Setup
+
+Define multiple tours in your `TourProvider`:
+
+```tsx showLineNumbers title="lib/tours.ts"
+import { type Tour } from "@/components/ui/tour"
+
+export const tours = [
+    {
+        id: "onboarding",
+        steps: [
+            {
+                id: "welcome",
+                title: "Welcome!",
+                content: "Welcome to our app. Let's get you started.",
+            },
+            {
+                id: "dashboard",
+                title: "Your Dashboard",
+                content: "This is your main dashboard.",
+            },
+        ],
+    },
+    {
+        id: "settings-guide",
+        steps: [
+            {
+                id: "profile",
+                title: "Profile Settings",
+                content: "Customize your profile here.",
+            },
+            {
+                id: "preferences",
+                title: "Preferences",
+                content: "Set your app preferences.",
+            },
+        ],
+    },
+] satisfies Tour[]
+```
+
+```tsx showLineNumbers title="app/layout.tsx"
+import { TourProvider } from "@/components/ui/tour"
+import { tours } from "@/lib/tours"
+
+export default function RootLayout() {
+    return <TourProvider tours={tours}>{/* Your app content */}</TourProvider>
+}
+```
+
+## Starting Different Tours
+
+Use the `useTour` hook to start specific tours by their ID:
+
+```tsx showLineNumbers
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { useTour } from "@/components/ui/tour"
+
+export function TourButtons() {
+    const tour = useTour()
+
+    return (
+        <div>
+            <Button onClick={() => tour.start("onboarding")}>
+                Start Onboarding
+            </Button>
+            <Button onClick={() => tour.start("settings-guide")}>
+                Settings Guide
+            </Button>
+        </div>
+    )
+}
+```
+
+## Use Cases
+
+Multiple tours are useful for:
+
+- **Onboarding vs. Feature Tours**: Separate initial user onboarding from specific feature walkthroughs
+- **Role-Based Tours**: Different tours for different user roles (admin, editor, viewer)
+- **Context-Specific Guides**: Show different tours based on the current page or user action

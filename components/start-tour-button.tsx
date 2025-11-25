@@ -7,7 +7,7 @@ export function StartTourButton() {
     const tour = useTour()
 
     return (
-        <Button size="lg" onClick={() => tour.start()}>
+        <Button size="lg" onClick={() => tour.start("main")}>
             Start Tour
         </Button>
     )

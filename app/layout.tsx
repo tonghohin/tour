@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils"
 
 import { ClarityScript } from "@/components/clarity-script"
 
-import { steps } from "@/lib/steps"
-import { Tour } from "@/registry/new-york-v4/ui/tour"
+import { tours } from "@/lib/tours"
+import { TourProvider } from "@/registry/new-york-v4/ui/tour"
 import "@/styles/globals.css"
 
 export const metadata: Metadata = {
@@ -97,7 +97,7 @@ export default function RootLayout({
                     fontVariables
                 )}>
                 <ThemeProvider>
-                    <Tour steps={steps}>{children}</Tour>
+                    <TourProvider tours={tours}>{children}</TourProvider>
                     <ClarityScript />
                 </ThemeProvider>
             </body>
