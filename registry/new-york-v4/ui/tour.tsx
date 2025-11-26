@@ -148,18 +148,38 @@ function TourOverlay({
     >([])
 
     React.useEffect(() => {
-        function updatePosition(shouldScroll = false) {
+        let needsScroll = true
+
+        function updatePosition() {
             const elements = document.querySelectorAll(
                 `[data-tour-step-id*='${step.id}']`
             )
 
             if (elements.length > 0) {
-                const newTargets = Array.from(elements).map((element) => {
+                const validElements: {
+                    rect: {
+                        width: number
+                        height: number
+                        x: number
+                        y: number
+                        left: number
+                        top: number
+                        right: number
+                        bottom: number
+                        toJSON: () => void
+                    }
+                    radius: number
+                    element: Element
+                }[] = []
+
+                Array.from(elements).forEach((element) => {
                     const rect = element.getBoundingClientRect()
+                    if (rect.width === 0 && rect.height === 0) return
+
                     const style = window.getComputedStyle(element)
                     const radius = Number(style.borderRadius) || 4
 
-                    return {
+                    validElements.push({
                         rect: {
                             width: rect.width,
                             height: rect.height,
@@ -172,35 +192,40 @@ function TourOverlay({
                             toJSON: () => {},
                         },
                         radius,
-                    }
+                        element,
+                    })
                 })
-                setTargets(newTargets)
 
-                if (shouldScroll) {
-                    elements[0].scrollIntoView({
+                setTargets(
+                    validElements.map(({ rect, radius }) => ({ rect, radius }))
+                )
+
+                if (validElements.length > 0 && needsScroll) {
+                    validElements[0].element.scrollIntoView({
                         behavior: "smooth",
                         block: "center",
                     })
+                    needsScroll = false
                 }
             } else {
                 setTargets([])
             }
         }
 
-        updatePosition(true)
-        const handleResizeOrScroll = () => updatePosition(false)
+        updatePosition()
+        const handleResizeOrScroll = () => updatePosition()
 
         window.addEventListener("resize", handleResizeOrScroll)
         window.addEventListener("scroll", handleResizeOrScroll, true)
 
-        const observer = new MutationObserver(() => updatePosition(false))
+        const observer = new MutationObserver(() => updatePosition())
         observer.observe(document.body, {
             attributes: true,
             childList: true,
             subtree: true,
         })
 
-        const resizeObserver = new ResizeObserver(() => updatePosition(false))
+        const resizeObserver = new ResizeObserver(() => updatePosition())
         resizeObserver.observe(document.body)
 
         return () => {
