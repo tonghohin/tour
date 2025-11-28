@@ -28,7 +28,9 @@ export function GitHubLink() {
 }
 
 export async function StarsCount() {
-    const data = await fetch("https://api.github.com/repos/tonghohin/tour")
+    const data = await fetch("https://api.github.com/repos/tonghohin/tour", {
+        cache: "no-store",
+    })
     const json = await data.json()
     const stars = json.stargazers_count
 
