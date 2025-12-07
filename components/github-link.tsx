@@ -28,17 +28,15 @@ export function GitHubLink() {
 }
 
 export async function StarsCount() {
-    const data = await fetch("https://api.github.com/repos/tonghohin/tour", {
-        cache: "no-store",
-    })
+    const data = await fetch("https://api.github.com/repos/tonghohin/tour")
     const json = await data.json()
-    const stars = json.stargazers_count
+    if (!json.stargazers_count) return null
 
     return (
-        stars > 0 && (
-            <span className="text-muted-foreground text-xs tabular-nums">
-                {stars >= 1000 ? `${(stars / 1000).toFixed(1)}k` : stars}
-            </span>
-        )
+        <span className="text-muted-foreground text-xs tabular-nums">
+            {json.stargazers_count >= 1000
+                ? `${(json.stargazers_count / 1000).toFixed(1)}k`
+                : json.stargazers_count}
+        </span>
     )
 }
