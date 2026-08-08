@@ -28,7 +28,7 @@ export function GitHubLink() {
 }
 
 export async function StarsCount() {
-    const data = await fetch("https://api.github.com/repos/tonghohin/tour")
+    const data = await fetch("https://api.github.com/repos/tonghohin/tour", { next: { revalidate: 3600 } })
     const json = await data.json()
     if (!json.stargazers_count) return null
 
